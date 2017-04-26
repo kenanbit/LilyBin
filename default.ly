@@ -1,9 +1,11 @@
-% LilyBin
-\score{
-	{
-		c'
-	}
+% LilyBin for Clairnote music notation
+\include "clairnote-code.ly"
 
-	\layout{}
-	\midi{}
+\score {
+    {
+        c'
+    }
+
+    \layout{}
+    \midi{}
 }
