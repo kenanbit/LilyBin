@@ -45,9 +45,13 @@ require([
 			$('#version_sel a[data-version="unstable"]').append(' (' + data.unstable + ')');
 		});
 
-		function includeClairnoteCode(ly, clairnoteCodeString) {
-			var regex = /\\include(.|\n)*?\"clairnote-code\.ly\"/g;
-			return ly.replace(regex, clairnoteCodeString + '\n');
+		function includeClairnoteCode(ly, codeString) {
+			// when the include command  is commented out with %, first remove
+			// the rest of the line so we don't insert the code
+			var commented = /%.*?\\include.*?\"clairnote-code\.ly\".*/g,
+			    included = /\\include(.|\n)*?\"clairnote-code\.ly\"/g,
+			    noComment = ly.replace(commented, '');
+			return noComment.replace(included, '\n' + codeString + '\n');
 		};
 
 		function loadPreview() {
