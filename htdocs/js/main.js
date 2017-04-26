@@ -45,9 +45,14 @@ require([
 			$('#version_sel a[data-version="unstable"]').append(' (' + data.unstable + ')');
 		});
 
+		function includeClairnoteCode(ly, clairnoteCodeString) {
+			var regex = /\\include(.|\n)*?\"clairnote-code\.ly\"/g;
+			return ly.replace(regex, clairnoteCodeString + '\n');
+		};
+
 		function loadPreview() {
 			preview.load({
-				code: clairnoteCodeString + '\n' + editor.getValue(),
+				code: includeClairnoteCode(editor.getValue(), clairnoteCodeString),
 				version: $('#version_btn').data('state')
 			}, function (err, response) {
 				if (err) return;
