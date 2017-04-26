@@ -21,8 +21,9 @@ require([
 	'jquery',
 	'Preview',
 	'Editor',
+	'ClairnoteCode',
 	'bootstrap'
-], function($, Preview, Editor) {
+], function($, Preview, Editor, clairnoteCodeString) {
 	$(function() {
 		var STAGE = 'https://7icpm9qr6a.execute-api.us-west-2.amazonaws.com/prod/';
 		var score = {};
@@ -46,7 +47,7 @@ require([
 
 		function loadPreview() {
 			preview.load({
-				code: editor.getValue(),
+				code: clairnoteCodeString + '\n' + editor.getValue(),
 				version: $('#version_btn').data('state')
 			}, function (err, response) {
 				if (err) return;
