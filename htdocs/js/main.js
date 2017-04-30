@@ -45,18 +45,19 @@ require([
 			$('#version_sel a[data-version="unstable"]').append(' (' + data.unstable + ')');
 		});
 
+		function removeComments(ly) {
+			var comments = /(%{(.|\n)*%}|%.*)/g;
+			return ly.replace(comments, '');
+		};
+
 		function includeClairnoteCode(ly, codeString) {
-			// when the include command  is commented out with %, first remove
-			// the rest of the line so we don't insert the code
-			var commented = /%.*?\\include.*?\"clairnote-code\.ly\".*/g,
-			    included = /\\include(.|\n)*?\"clairnote-code\.ly\"/g,
-			    noComment = ly.replace(commented, '');
-			return noComment.replace(included, '\n' + codeString + '\n');
+			var included = /\\include(.|\n)*?\"clairnote-code\.ly\"/g;
+			return ly.replace(included, '\n' + codeString + '\n');
 		};
 
 		function loadPreview() {
 			preview.load({
-				code: includeClairnoteCode(editor.getValue(), clairnoteCodeString),
+				code: includeClairnoteCode(removeComments(editor.getValue()), clairnoteCodeString),
 				version: $('#version_btn').data('state')
 			}, function (err, response) {
 				if (err) return;
