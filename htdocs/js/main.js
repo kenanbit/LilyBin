@@ -81,7 +81,9 @@ require([
 		}
 
 		function changed() {
-			$('#preview_button, #save_button').attr('disabled', false);
+			// Disable saving to LilyBin for now.
+			// $('#preview_button, #save_button').attr('disabled', false);
+			$('#preview_button').attr('disabled', false);
 		}
 
 		var editor = new Editor($('#code_container'));
@@ -89,7 +91,8 @@ require([
 		                    'save'   : save,
 		                    'change' : changed });
 
-		if (score.id) $('#save_button').attr('disabled', true);
+		// Disable saving to LilyBin for now.
+		// if (score.id) $('#save_button').attr('disabled', true);
 
 		var mainHeight = $(window).height() - $('#header').outerHeight();
 		var mainWidth  = $(window).width();
@@ -144,7 +147,9 @@ require([
 
 		$('#preview_button').click(loadPreview);
 
-		$('#save_button').click(editor.save.bind(editor));
+		// Disable saving to LilyBin for now.
+		// $('#save_button').click(editor.save.bind(editor));
+
 		$('#reset_button').click(editor.reset.bind(editor));
 		$('#undo_button').click(editor.undo.bind(editor));
 		$('#redo_button').click(editor.redo.bind(editor));
@@ -233,7 +238,8 @@ require([
 			}
 			preview.handleResponse({error: errorMessage});
 			$('#preview_button')     .off('click');
-			$('#save_button')        .off('click');
+			// Disable saving to LilyBin for now.
+			// $('#save_button')        .off('click');
 			$('#version_sel a')      .off('click');
 		})
 
