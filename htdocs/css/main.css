@@ -1,12 +1,6 @@
 .navbar-lilybin {
-	background-color: #3d668f;
+	background-color: rgb(90, 111, 128);
 	color: #fff;
-
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#477ca5', endColorstr='#375e7f');
-	background: -webkit-linear-gradient(top, #477ca5, #375e7f);
-	background:    -moz-linear-gradient(top, #477ca5, #375e7f);
-	background:      -o-linear-gradient(top, #477ca5, #375e7f);
-	background:         linear-gradient(to bottom, #477ca5, #375e7f);
 	margin-bottom: 0;
 }
 .navbar-lilybin a {
@@ -19,13 +13,8 @@
 .navbar-lilybin .navbar-nav > li > a:hover,
 .navbar-lilybin .navbar-nav > li > a:focus,
 .navbar-lilybin .navbar-nav > .open > a {
+	background-color: rgb(125, 175, 213);
 	color: #fff;
-
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d6b9b', endColorstr='#2d4d75');
-	background: -webkit-linear-gradient(top, #3d6b9b, #2d4d75);
-	background:    -moz-linear-gradient(top, #3d6b9b, #2d4d75);
-	background:      -o-linear-gradient(top, #3d6b9b, #2d4d75);
-	background:         linear-gradient(to bottom, #3d6b9b, #2d4d75);
 }
 
 /* These were written by simply finding all the media queries and then *
