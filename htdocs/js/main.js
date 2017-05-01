@@ -8,7 +8,7 @@ require.config({
 		}
 	},
 	paths: {
-		jquery: 'http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min',
+		jquery: 'https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min',
 		bootstrap: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min',
 		CodeMirror: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0',
 		// CDNJS uses weird paths. Need this hack to allow loading CM addons
