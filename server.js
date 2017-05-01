@@ -100,6 +100,7 @@ app.get('/:id?/:revision?', function(req, res, next) {
 	});
 });
 
-const port = process.env.LISTEN_PORT || 3001;
+// Heroku uses $PORT
+const port = process.env.PORT || process.env.LISTEN_PORT || 3001;
 app.listen(port);
 console.log('Listening on port ' + port + '.');
