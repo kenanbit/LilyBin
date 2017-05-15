@@ -1,5 +1,5 @@
 % LilyBin for Clairnote music notation
-\include "clairnote-code.ly"
+\include "clairnote.ly"
 
 \score {
     {

@@ -21,9 +21,9 @@ require([
 	'jquery',
 	'Preview',
 	'Editor',
-	'ClairnoteCode',
+	'Clairnote',
 	'bootstrap'
-], function($, Preview, Editor, clairnoteCodeString) {
+], function($, Preview, Editor, clairnoteLyString) {
 	$(function() {
 		var STAGE = 'https://7icpm9qr6a.execute-api.us-west-2.amazonaws.com/prod/';
 		var score = {};
@@ -50,14 +50,14 @@ require([
 			return ly.replace(comments, '');
 		};
 
-		function includeClairnoteCode(ly, codeString) {
-			var included = /\\include(.|\n)*?\"clairnote-code\.ly\"/g;
-			return ly.replace(included, '\n' + codeString + '\n');
+		function includeClairnoteLy(ly, clairnoteLyString) {
+			var included = /\\include(.|\n)*?\"clairnote\.ly\"/g;
+			return ly.replace(included, '\n' + clairnoteLyString + '\n');
 		};
 
 		function loadPreview() {
 			preview.load({
-				code: includeClairnoteCode(removeComments(editor.getValue()), clairnoteCodeString),
+				code: includeClairnoteLy(removeComments(editor.getValue()), clairnoteLyString),
 				version: $('#version_btn').data('state')
 			}, function (err, response) {
 				if (err) return;
