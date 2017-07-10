@@ -154,6 +154,7 @@ require([
 		$('#undo_button').click(editor.undo.bind(editor));
 		$('#redo_button').click(editor.redo.bind(editor));
 
+		/* // Disable dropbox for now
 		$('#open_from_dropbox').click(function() {
 			Dropbox.choose({
 				success: function(files) {
@@ -219,6 +220,7 @@ require([
 			});
 
 		});
+		*/
 
 		$.get('/api/' + currentPage).done(function(data) {
 			score.version = data.version;
