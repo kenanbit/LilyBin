@@ -21,9 +21,15 @@ require([
 	'jquery',
 	'Preview',
 	'Editor',
-	'Clairnote',
+	'Clairnote_2_18',
+	'Clairnote_2_19',
 	'bootstrap'
-], function($, Preview, Editor, clairnoteLyString) {
+], function(
+	$,
+	Preview,
+	Editor,
+	clairnoteLyString_2_18,
+	clairnoteLyString_2_19) {
 	$(function() {
 		var STAGE = 'https://7icpm9qr6a.execute-api.us-west-2.amazonaws.com/prod/';
 		var score = {};
@@ -56,9 +62,14 @@ require([
 		};
 
 		function loadPreview() {
+			var version = $('#version_btn').data('state');
+			var clairnoteLyString = version === 'unstable'
+				? clairnoteLyString_2_19
+				: clairnoteLyString_2_18;
+
 			preview.load({
 				code: includeClairnoteLy(removeComments(editor.getValue()), clairnoteLyString),
-				version: $('#version_btn').data('state')
+				version: version
 			}, function (err, response) {
 				if (err) return;
 				$('#preview_button').attr('disabled', true);
