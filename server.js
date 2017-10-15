@@ -81,7 +81,7 @@ app.get('/api/:id?/:revision?', function(req, res, next) {
 	const id = req.params.id,
 		revision = +req.params.revision || 1;
 
-	if (!id) return res.json({code: defaultScore, version: 'stable'})
+	if (!id) return res.json({code: defaultScore, version: 'unstable'})
 	scores.get(id, revision)
 		.then(function (score) {
 			res.json(score);
