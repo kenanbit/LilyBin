@@ -23,13 +23,16 @@ require([
 	'Editor',
 	'Clairnote_2_18',
 	'Clairnote_2_19',
+        'hymn_includes',
 	'bootstrap'
 ], function(
 	$,
 	Preview,
 	Editor,
 	clairnoteLyString_2_18,
-	clairnoteLyString_2_19) {
+	clairnoteLyString_2_19,
+        hymnIncludes
+) {
 	$(function() {
 		var STAGE = 'https://7icpm9qr6a.execute-api.us-west-2.amazonaws.com/prod/';
 		var score = {};
@@ -56,10 +59,23 @@ require([
 			return ly.replace(comments, '');
 		};
 
-		function includeClairnoteLy(ly, clairnoteLyString) {
-			var included = /\\include(.|\n)*?\"clairnote\.ly\"/g;
-			return ly.replace(included, '\n' + clairnoteLyString + '\n');
-		};
+                function includeHymnSinger(ly, clairnoteLyString) {
+                    window.record = []
+                    regex = new RegExp("\\\\include \"(?:\.\.\/\.\.\/lib\/)?([0-9a-z_]*)\.ly\"", "g")
+                    match = regex.exec(ly)
+                    var i = 0;
+                    while (match != null && i < 20) {
+                        i += 1;
+                        console.log(match);
+                        file_base = match[1]
+                        ly = ly.replace(match[0], hymnIncludes[file_base]);
+                        console.log(ly.substring(0,100));
+                        regex.lastIndex = 0; // Resets the regex
+                        match = regex.exec(ly)
+                    }
+                    window.ly = ly;
+                    return ly
+                }
 
 		function loadPreview() {
 			var version = $('#version_btn').data('state');
@@ -68,7 +84,7 @@ require([
 				: clairnoteLyString_2_18;
 
 			preview.load({
-				code: includeClairnoteLy(removeComments(editor.getValue()), clairnoteLyString),
+				code: includeHymnSinger(removeComments(editor.getValue()), clairnoteLyString),
 				version: version
 			}, function (err, response) {
 				if (err) return;
