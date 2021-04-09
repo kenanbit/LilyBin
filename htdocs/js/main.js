@@ -108,8 +108,6 @@ require([
 		}
 
 		function changed() {
-			// Disable saving to LilyBin for now.
-			// $('#preview_button, #save_button').attr('disabled', false);
 			$('#preview_button').attr('disabled', false);
 		}
 
@@ -117,9 +115,6 @@ require([
 		editor.event.bind({ 'preview': loadPreview,
 		                    'save'   : save,
 		                    'change' : changed });
-
-		// Disable saving to LilyBin for now.
-		// if (score.id) $('#save_button').attr('disabled', true);
 
 		var mainHeight = $(window).height() - $('#header').outerHeight();
 		var mainWidth  = $(window).width();
@@ -174,80 +169,9 @@ require([
 
 		$('#preview_button').click(loadPreview);
 
-		// Disable saving to LilyBin for now.
-		// $('#save_button').click(editor.save.bind(editor));
-
 		$('#reset_button').click(editor.reset.bind(editor));
 		$('#undo_button').click(editor.undo.bind(editor));
 		$('#redo_button').click(editor.redo.bind(editor));
-
-		/* // Disable dropbox for now
-		$('#open_from_dropbox').click(function() {
-			Dropbox.choose({
-				success: function(files) {
-					var link = files[0].link;
-					editor.spinner.show();
-					$.get(link).done(function(code) {
-						score.code = code;
-						editor.openFile(code, !!code);
-					}).fail(function(err) {
-						var errorMessage = 'While fetching file from Dropbbox:\n\n';
-						if (err.responseJSON && err.responseJSON.err) {
-							errorMessage += err.responseJSON.err;
-						} else {
-							errorMessage += err.statusText;
-						}
-						preview.handleResponse({error: errorMessage});
-					}).always(function() {
-						editor.spinner.hide();
-					})
-				},
-				linkType: 'direct',
-				multiselect: false
-			});
-		});
-
-		$('#save_to_dropbox').click(function() {
-			editor.spinner.show();
-			$.post(STAGE + '/save_temp', JSON.stringify({
-				code: editor.getValue(),
-			}), function(response) {
-				editor.spinner.hide();
-				preview.error.hide();
-				if (!response.id) {
-					var errorMessage = 'Error while uploading score:\n\n' + JSON.stringify(response, null, 2);
-					preview.handleResponse({
-						error: errorMessage
-					});
-				}
-				var url = 'https://s3-us-west-2.amazonaws.com/lilybin-source-files/' + response.id + '.ly';
-				var $modal = $('#save_modal').modal('show');
-				$('#save_modal_ok').click(function(e) {
-					$(this).off('click');
-					$modal.modal('hide')
-					Dropbox.save(url, $('#file_name').val(), {
-						success: function() {},
-						error: function(errorMsg) {
-							preview.handleResponse({
-								error: 'Error while saving to Dropbox:\n' + errorMsg
-							});
-						}
-					});
-				});
-			}, 'json').fail(function(err) {
-				var errorMessage = 'Error while uploading score:\n\n';
-				if (err.responseJSON && err.responseJSON.err) {
-					errorMessage += err.responseJSON.err;
-				} else {
-					errorMessage += err.statusText;
-				}
-				preview.handleResponse({
-					error: errorMessage
-				});
-			});
-
-		});
-		*/
 
 		$.get('/api/' + currentPage).done(function(data) {
 			score.version = data.version;
@@ -267,8 +191,6 @@ require([
 			}
 			preview.handleResponse({error: errorMessage});
 			$('#preview_button')     .off('click');
-			// Disable saving to LilyBin for now.
-			// $('#save_button')        .off('click');
 			$('#version_sel a')      .off('click');
 		})
 
